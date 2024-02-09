@@ -1,0 +1,18 @@
+name: DLTM
+channels:
+- pytorch
+- defaults
+- conda-forge
+dependencies:
+- python=3.7
+- pytorch=1.8.0
+- pandas
+- matplotlib
+- rdkit
+- scipy
+- pip
+-
+- pip:
+  - numpy
+  - moses
+  - smilesPE
