@@ -22,11 +22,11 @@ class Config():
     h = 8
     num_layers = 2
     batch_size = 2
-    lr_F = 0.0001
-    lr_D = 0.0001
+    lr_G = 0.0001
+    lr_C = 0.0001
     L2 = 0
-    iter_D = 10
-    iter_F = 5
+    iter_G = 10
+    iter_C = 5
     F_pretrain_iter = 5
     log_steps = 1
     eval_steps = 1000
@@ -40,7 +40,7 @@ class Config():
     adv_factor = 10
 
     inp_drop_prob = 0
-    epoches = 1
+    epoches = 50
 
 
 if __name__ == '__main__':
