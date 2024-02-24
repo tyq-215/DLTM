@@ -24,9 +24,9 @@ The most of them are listed below:
     head : the number of Transformer attention head
     num_layers : the number of Transformer layer
     batch_size : the training batch size
-    lr_T : the learning rate for the Transformer
+    lr_G : the learning rate for the Transformer
     lr_C : the learning rate for the Classfier
-    iter_T : the number of the Classfier update step pre training interation
+    iter_G : the number of the Classfier update step pre training interation
     iter_C : the number of the Transformer update step pre training interation
     dropout : the dropout factor for the whole model
     eval_steps : the number of steps to evaluate model info
