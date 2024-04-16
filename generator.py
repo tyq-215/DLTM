@@ -37,14 +37,14 @@ class Transformer(nn.Module):
         super(Transformer, self).__init__()
 
         num_domain_labels, num_layers = config.num_domain_labels, config.num_layers
-        # d_model指的是embedding数目，max_length指的是最大的句子长度
+
         d_model, max_length = config.d_model, config.max_length
-        # h：多头的头数，每个头关注的不一样，
+
         h, dropout = config.h, config.dropout
-        # 可学习的位置编码，用于给句子和位置编码相加
+
         learned_pos_embed = config.learned_pos_embed
         load_pretrained_embed = config.load_pretrained_embed
-        ####################################
+
         fp_and_emb = self.fp + 256
         self.fp_and_emb = fp_and_emb
         fp_and_emb_sqrt = int(math.sqrt(fp_and_emb))
@@ -96,11 +96,7 @@ class Transformer(nn.Module):
         self.model2 = nn.Sequential(*model2)
         self.conv1 = nn.Conv2d(2, 1, 7, padding=3, bias=False)
         self.sigmoid = nn.Sigmoid()
-        # model3 = [
-        #     nn.Linear(self.fp, self.emb, bias=False),
-        # ]
-        # self.model3 = nn.Sequential(*model3)
-        ####################################
+
 
         self.max_length = config.max_length
         self.eos_idx = vocab.stoi['<eos>']
@@ -112,12 +108,12 @@ class Transformer(nn.Module):
             learned_pos_embed,
             load_pretrained_embed,
         )
-        # 扰动向量
+
         self.sos_token = nn.Parameter(torch.randn(d_model))
         self.encoder = Encoder(num_layers, d_model, len(vocab), h, dropout)
         self.decoder = Decoder(num_layers, d_model, len(vocab), h, dropout)
 
-    # 输入的数据矩阵，
+
     def forward(self, inp_tokens, gold_tokens, inp_lengths, domain_label, fp=None,
                 generate=False, differentiable_decode=False, temperature=1.0, test=False):
         batch_size = inp_tokens.size(0)
@@ -156,7 +152,7 @@ class Transformer(nn.Module):
         memory = self.encoder(enc_input, src_mask)
         memory = memory.data.cpu().numpy()
         sos_token = self.sos_token.view(1, 1, -1).expand(batch_size, -1, -1)
-        # 训练期间
+
         if not generate:
             dec_input = gold_tokens[:, :-1]
             max_dec_len = gold_tokens.size(1)
