@@ -35,7 +35,7 @@ class Transformer(nn.Module):
 
     def __init__(self, config, vocab):
         super(Transformer, self).__init__()
-        # 风格数目，网络层数，层数指的是编码器和解码器的block数目
+
         num_domain_labels, num_layers = config.num_domain_labels, config.num_layers
         # d_model指的是embedding数目，max_length指的是最大的句子长度
         d_model, max_length = config.d_model, config.max_length
