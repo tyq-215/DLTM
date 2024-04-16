@@ -14,7 +14,6 @@ def decode(self, matrix):
     return smiles
 
 
-# 根据字典找到单词
 def tensor2text(vocab, tensor):
     text = []
     index2word = vocab.itos
@@ -199,10 +198,10 @@ def get_lengths(tokens, eos_idx):
 
 
 def batch_preprocess(batch, pad_idx, eos_idx, reverse=False):
-    # batch里面包含两个矩阵，一个high，一个low，一个high里面又有两个矩阵，即两个句子
+
     if isinstance(batch, tuple):
         batch_high, batch_low = batch
-        # 两个句子的长度差异
+
         diff = batch_high.size(1) - batch_low.size(1)
         if diff < 0:
             pad = torch.full_like(batch_low[:, :-diff], pad_idx)
